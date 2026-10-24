@@ -22,3 +22,8 @@ Setup: `python -m venv .venv && .venv/Scripts/pip install -r tools/docs-requirem
 - Page layout: title → one-line lead (`{ .lead }`) → time/needs chips (`ob-meta`) → `!!! robot "For example"` card → **The shortest way** as numbered steps (`<div class="steps" markdown>`) → Details → Reference table. Short sentences; every page has `description:` front matter (it feeds llms.txt).
 - Say what a feature is *for* (a concrete robot example) before how it works. App places by their UI names: Home, Sensors → <page>, Robot → <card>, Connect → <guide>, Settings.
 - The app is closed source: no app code paths or build steps here; installing means the APK from the home repo's releases.
+
+## Still to do
+
+- Reference pages for the Python API, the ROS bridge and the Arduino library.
+- Retake the Location and Hardware screenshots (they predate the redesign); screenshots are taken with the app repo's tools (`phone_ui.py`, `clean_shot.py`, `hide_coords.py`).
