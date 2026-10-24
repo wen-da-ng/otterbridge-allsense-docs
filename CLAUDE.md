@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-The AllSense docs site (https://docs.allsense.otterbridge.org/): MkDocs Material, Markdown in `docs/`, theme overrides in `docs/overrides/`, styles in `docs/stylesheets/extra.css`, the `tools/mkdocs_llms.py` hook (llms.txt, llms-full.txt, a `.md` per page, the "Copy page" menu). Hosted on Netlify (`netlify.toml`, build on every push to main). Public, MIT (names, logo and screenshots excluded).
+The AllSense docs site (https://docs.allsense.otterbridge.org/): MkDocs Material, Markdown in `docs/`, theme overrides in `docs/overrides/`, styles in `docs/stylesheets/extra.css`, the `tools/mkdocs_llms.py` hook (llms.txt, llms-full.txt, a `.md` per page, the "Copy page" menu). Hosted on GitHub Pages: `.github/workflows/ci.yml` builds on every push and pull request and publishes pushes to main (custom domain in Settings → Pages; Squarespace DNS CNAME docs.allsense → wen-da-ng.github.io). Netlify was dropped 2026-10-24 (out of credit). Public, MIT (names, logo and screenshots excluded).
 
 ## Working here
 

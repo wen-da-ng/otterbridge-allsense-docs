@@ -10,8 +10,10 @@ Markdown in `docs/`, built with [MkDocs Material](https://squidfunk.github.io/mk
 python -m venv .venv
 .venv/Scripts/pip install -r tools/docs-requirements.txt    # .venv/bin/pip on Linux and macOS
 .venv/Scripts/mkdocs serve                                   # preview at http://127.0.0.1:8000
-.venv/Scripts/mkdocs build --strict                          # what CI and Netlify run
+.venv/Scripts/mkdocs build --strict                          # what CI runs
 ```
+
+Every push to `main` publishes the site to GitHub Pages (`.github/workflows/ci.yml`); pull requests only build it.
 
 ## Where things come from
 

@@ -1,9 +1,19 @@
 name: CI
 
+# Pull requests: build only. Pushes to main: build, then publish to GitHub Pages
+# (https://docs.allsense.otterbridge.org/, custom domain set in Settings → Pages).
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -16,3 +26,25 @@ jobs:
       - run: pip install -r tools/docs-requirements.txt
       # Fails on broken links, missing pages and missing included files (pymdownx.snippets check_paths).
       - run: mkdocs build --strict
+      # The theme ships source maps (its own open-source code); drop them and the lines that point to them.
+      - run: |
+          find site -name '*.map' -delete
+          find site \( -name '*.js' -o -name '*.css' \) -exec sed -i '/sourceMappingURL=/d' {} +
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
