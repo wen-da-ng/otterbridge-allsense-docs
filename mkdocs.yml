@@ -1,0 +1,106 @@
+# The documentation site: docs/ built with MkDocs Material.
+#   .venv/Scripts/mkdocs serve      # preview at http://127.0.0.1:8000
+#   .venv/Scripts/mkdocs build --strict
+# Setup: python -m venv .venv && .venv/Scripts/pip install -r tools/docs-requirements.txt
+# The spec pages and code examples are copies from the other repos: refresh with python tools/sync.py.
+site_name: AllSense by OtterBridge
+site_url: https://docs.allsense.otterbridge.org/
+site_description: Turn an Android phone into a sensor hub for robots.
+repo_url: https://github.com/wen-da-ng/otterbridge-allsense-docs
+repo_name: otterbridge-allsense-docs
+edit_uri: edit/main/docs/
+copyright: Clients, test kit and protocol MIT · app © 2026 wen-da-ng
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  logo: images/logo.png
+  favicon: images/favicon.png
+  font:
+    text: Atkinson Hyperlegible
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle: { icon: material/weather-night, name: Dark }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle: { icon: material/weather-sunny, name: Light }
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.tabs.link
+    - search.suggest
+    - search.highlight
+
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - javascripts/page-actions.js
+
+exclude_docs: |
+  overrides/
+  diagrams/
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc: { permalink: true }
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight: { anchor_linenums: true }
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed: { alternate_style: true }
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  # Examples are real files from the library repos, run by their tests, copied by tools/sync.py:
+  # --8<-- "examples/python/examples/quickstart.py"
+  - pymdownx.snippets: { base_path: ["."], check_paths: true }
+
+hooks:
+  - tools/mkdocs_llms.py
+
+validation:
+  # Some reference pages link to files in the repos; those aren't site pages.
+  links:
+    not_found: info
+    unrecognized_links: info
+
+nav:
+  - Home: index.md
+  - Get started:
+      - get-started/index.md
+      - Browser: get-started/browser.md
+      - Programming:
+          - Python: get-started/python.md
+          - C++: get-started/cpp.md
+          - Rust: get-started/rust.md
+      - ROS 2: get-started/ros2.md
+      - Microcontroller: get-started/board.md
+      - MQTT: get-started/mqtt.md
+  - Guides:
+      - Record a run: guides/recording.md
+      - Mount on the robot: guides/mount.md
+      - Follow an AprilTag: guides/apriltags.md
+      - Give the robot a face: guides/face.md
+      - Cameras and microphones: guides/cameras.md
+  - How it works: ARCHITECTURE.md
+  - Reference:
+      - Protocol: PROTOCOL.md
+      - Frame templates: TEMPLATES.md
+      - Recordings: RECORDING.md
+      - MQTT: MQTT.md
+  - Contributing:
+      - contributing/index.md
+      - Modules: MODULES.md

@@ -1,0 +1,36 @@
+{#- The home page: a hero, then index.md's content. -#}
+{% extends "main.html" %}
+{% block extrahead %}
+  {{ super() }}
+  <style>.md-content__inner { max-width: 56rem; } .md-main__inner { margin-top: 0.5rem; } @media screen and (min-width: 60em) { .md-content__inner { margin-left: auto; margin-right: auto; } }</style>
+{% endblock %}
+{% block tabs %}
+  {{ super() }}
+  <section class="ob-hero">
+    <div class="ob-hero__inner md-grid">
+      <div class="ob-hero__text">
+        <p class="ob-eyebrow">{% include "partials/brand.html" %}</p>
+        <h1>Give your robot<br>a phone's <em>senses</em>.</h1>
+        <p class="ob-hero__lead">That old phone in a drawer has an IMU, GPS, cameras, microphones and radios. AllSense streams them to your robot: ROS&nbsp;2, Python, C++, Rust, Arduino or a browser. No wiring, no cloud.</p>
+        <div class="ob-hero__buttons">
+          <a href="{{ 'get-started/' | url }}" class="md-button md-button--primary">Get started</a>
+          <button type="button" class="md-button ob-copy-all" data-ob-copy-all="{{ 'llms-full.txt' | url }}">
+            {% include ".icons/material/creation-outline.svg" %}<span data-ob-copy-label>Copy docs for your AI</span>
+          </button>
+        </div>
+      </div>
+      <div class="ob-hero__phone" aria-hidden="true">
+        <div class="ob-phone">
+          <img src="{{ 'images/app/light/home-hero.png' | url }}" class="ob-only-light" alt="">
+          <img src="{{ 'images/app/dark/home-hero.png' | url }}" class="ob-only-dark" alt="">
+        </div>
+        <span class="ob-chip ob-chip--1"><i></i>accelerometer <b>9.81</b> m/s²</span>
+        <span class="ob-chip ob-chip--2"><i></i>GPS <b>12</b> satellites</span>
+        <span class="ob-chip ob-chip--3"><i></i>camera <b>30</b> fps</span>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% block content %}
+  {{ page.content }}
+{% endblock %}

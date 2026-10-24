@@ -1,0 +1,12 @@
+# The docs site (mkdocs.yml) on Netlify: built on every push to main, published from site/.
+# The theme ships source maps (its own open-source code); they're dropped, with the lines that point to them.
+[build]
+  command = """
+    pip install -r tools/docs-requirements.txt && mkdocs build --strict && \
+    find site -name '*.map' -delete && \
+    find site \\( -name '*.js' -o -name '*.css' \\) -exec sed -i '/sourceMappingURL=/d' {} +
+  """
+  publish = "site"
+
+[build.environment]
+  PYTHON_VERSION = "3.12"

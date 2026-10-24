@@ -1,0 +1,20 @@
+{#- Above every page: copy it as Markdown for an AI, or open it in one. The Markdown is this
+    page's source with the examples filled in (tools/mkdocs_llms.py puts it in page_md). -#}
+{% if page_md %}
+  <div class="ob-actions" data-ob-actions>
+    <button type="button" class="ob-actions__copy" data-ob-copy title="Copy this page as Markdown, for an AI assistant">
+      {% include ".icons/material/content-copy.svg" %}<span data-ob-copy-label>Copy page</span>
+    </button>
+    <div class="ob-actions__more">
+      <button type="button" class="ob-actions__toggle" data-ob-menu aria-expanded="false" aria-haspopup="menu" title="More ways to use this page">{% include ".icons/material/chevron-down.svg" %}</button>
+      <div class="ob-actions__menu" role="menu">
+        <button type="button" data-ob-copy>{% include ".icons/material/language-markdown-outline.svg" %}<span><b>Copy page</b>As Markdown, for any AI</span></button>
+        <a href="index.md" target="_blank" rel="noopener">{% include ".icons/material/file-document-outline.svg" %}<span><b>View as Markdown</b>Plain text of this page</span></a>
+        <a data-ob-open="https://claude.ai/new?q=" target="_blank" rel="noopener">{% include ".icons/material/chat-outline.svg" %}<span><b>Open in Claude</b>Ask questions about this page</span></a>
+        <a data-ob-open="https://chatgpt.com/?q=" target="_blank" rel="noopener">{% include ".icons/material/chat-outline.svg" %}<span><b>Open in ChatGPT</b>Ask questions about this page</span></a>
+        <button type="button" data-ob-copy-all="{{ 'llms-full.txt' | url }}">{% include ".icons/material/book-open-page-variant-outline.svg" %}<span><b>Copy all docs</b>Every page in one file (llms-full.txt)</span></button>
+      </div>
+    </div>
+    <textarea data-ob-md hidden aria-hidden="true">{{ page_md | e }}</textarea>
+  </div>
+{% endif %}

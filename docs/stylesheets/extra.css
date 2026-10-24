@@ -1,0 +1,392 @@
+/* AllSense docs: the app's look on the web. OtterBridge palette (navy + orange identity, blue for
+   links, cyan only on dark), soft cards, generous spacing, few words per screen. */
+
+:root {
+  --ob-navy: #0B1F44;
+  --ob-orange: #FF5A00;
+  --ob-blue: #168BFF;
+  --ob-cyan: #22D3EE;
+  --ob-radius: 16px;
+  --ob-radius-sm: 10px;
+}
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--ob-navy);
+  --md-primary-fg-color--light: #1A3366;
+  --md-primary-fg-color--dark: #06142E;
+  --md-primary-bg-color: #FFFFFF;
+  --md-accent-fg-color: var(--ob-orange);
+  --md-typeset-a-color: #0B6BD3;
+  --md-default-bg-color: #FFFFFF;
+  --md-default-fg-color--light: #5B6A80;
+  --md-code-bg-color: #F5F8FC;
+  --md-typeset-color: #14223D;
+  --ob-surface: #F5F8FC;
+  --ob-card: #FFFFFF;
+  --ob-line: #E3E9F2;
+  --ob-heading: var(--ob-navy);
+  --ob-muted: #5B6A80;
+  --ob-glass: rgb(255 255 255 / 78%);
+  --ob-live: #0B6BD3;
+  --ob-shadow: 0 1px 2px rgb(11 31 68 / 6%), 0 8px 24px rgb(11 31 68 / 7%);
+}
+[data-md-color-scheme="slate"] {
+  --md-hue: 220;
+  --md-primary-fg-color: #06142E;
+  --md-primary-fg-color--light: #0B1F44;
+  --md-primary-fg-color--dark: #040D1F;
+  --md-primary-bg-color: #FFFFFF;
+  --md-accent-fg-color: var(--ob-orange);
+  --md-typeset-a-color: #4BA6FF;
+  --md-default-bg-color: #06142E;
+  --md-default-fg-color--light: #A3B1C6;
+  --md-code-bg-color: #0E2550;
+  --md-typeset-color: #E6ECF5;
+  --ob-surface: #0B1F44;
+  --ob-card: #0B1F44;
+  --ob-line: #1A3366;
+  --ob-heading: #FFFFFF;
+  --ob-muted: #A3B1C6;
+  --ob-glass: rgb(6 20 46 / 78%);
+  --ob-live: var(--ob-cyan);
+  --ob-shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 8px 24px rgb(0 0 0 / 25%);
+}
+
+/* ---------- Header: light glass, like an iOS bar, not a navy slab ---------- */
+.md-header, .md-tabs {
+  background-color: var(--ob-glass);
+  color: var(--ob-heading);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  backdrop-filter: saturate(180%) blur(16px);
+}
+.md-header { box-shadow: none; border-bottom: 1px solid var(--ob-line); }
+.md-header--shadow { box-shadow: none; }
+.md-tabs { border-bottom: 1px solid var(--ob-line); }
+.md-header__topic:first-child { font-weight: 700; }
+.md-tabs__link { opacity: 0.75; font-size: 0.72rem; }
+.md-tabs__item--active .md-tabs__link { opacity: 1; color: var(--ob-orange); font-weight: 700; }
+.md-search__form { background-color: var(--ob-surface); border-radius: 999px; }
+.md-search__input { color: var(--md-typeset-color); }
+.md-search__input::placeholder { color: var(--ob-muted); }
+.md-search__icon { color: var(--ob-muted); }
+[data-md-toggle="search"]:checked ~ .md-header .md-search__form { border-radius: var(--ob-radius-sm) var(--ob-radius-sm) 0 0; }
+.md-header__button.md-logo img { height: 1.8rem; }
+.md-source { color: var(--ob-muted); }
+
+/* ---------- Reading: bigger type, calm width, more air ---------- */
+.md-typeset { font-size: 0.86rem; line-height: 1.72; }
+.md-content__inner { max-width: 44rem; padding-top: 0.6rem; }
+@media screen and (min-width: 76.25em) { .md-content__inner { margin-left: auto; margin-right: auto; } }
+.md-typeset h1 {
+  color: var(--ob-heading); font-weight: 800; letter-spacing: -0.02em;
+  font-size: 2.1rem; line-height: 1.15; margin: 0.4rem 0 0.6rem;
+}
+.md-typeset h2 {
+  color: var(--ob-heading); font-weight: 750; letter-spacing: -0.01em;
+  font-size: 1.3rem; margin-top: 2.4rem;
+}
+.md-typeset h3 { color: var(--ob-heading); font-weight: 700; }
+.md-typeset .lead { font-size: 1.08rem; color: var(--ob-muted); line-height: 1.6; margin-top: 0; }
+.md-typeset a { text-underline-offset: 3px; }
+.md-typeset strong { color: var(--ob-heading); }
+.md-sidebar { padding-top: 1.6rem; }
+.md-nav__link--active, .md-nav__item .md-nav__link--active { color: var(--ob-orange); font-weight: 700; }
+.md-nav__title { color: var(--ob-muted); }
+
+/* Hide the navigation and contents bars on short pages? No: keep them, but quiet. */
+.md-nav { font-size: 0.72rem; }
+
+/* ---------- Page actions: Copy page ▾ ---------- */
+.ob-actions {
+  float: right; position: relative; z-index: 2; display: inline-flex; margin: 0.5rem 0 0.4rem 1rem;
+  border: 1px solid var(--ob-line); border-radius: 999px; background: var(--ob-card); box-shadow: var(--ob-shadow);
+}
+.ob-actions__copy, .ob-actions__toggle {
+  display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer; color: var(--ob-heading);
+  font: inherit; font-size: 0.7rem; font-weight: 700; background: none; border: 0; padding: 0.35rem 0.75rem; margin: 0;
+}
+.ob-actions__copy { border-radius: 999px 0 0 999px; }
+.ob-actions__more { position: static; display: inline-flex; }
+.ob-actions__toggle { border-left: 1px solid var(--ob-line); border-radius: 0 999px 999px 0; padding: 0.35rem 0.55rem; }
+.ob-actions svg { width: 0.95rem; height: 0.95rem; fill: currentColor; }
+.ob-actions__copy:hover, .ob-actions__toggle:hover { color: var(--ob-orange); }
+.ob-actions .ob-done { color: #1E9E5A; }
+.ob-actions__more:not(.open) .ob-actions__menu { display: none; }
+.ob-actions__more.open .ob-actions__toggle svg { transform: rotate(180deg); }
+.ob-actions__menu {
+  position: absolute; right: 0; top: calc(100% + 0.4rem); width: 17rem; padding: 0.35rem;
+  background: var(--ob-card); border: 1px solid var(--ob-line); border-radius: var(--ob-radius); box-shadow: var(--ob-shadow);
+  animation: ob-pop 140ms ease-out;
+}
+.ob-actions__menu > a, .ob-actions__menu > button {
+  display: flex; gap: 0.7rem; align-items: flex-start; width: 100%; text-align: left; cursor: pointer;
+  padding: 0.55rem 0.6rem; border: 0; background: none; border-radius: var(--ob-radius-sm);
+  color: var(--md-typeset-color); font: inherit; font-size: 0.68rem; line-height: 1.35;
+}
+.ob-actions__menu > a:hover, .ob-actions__menu > button:hover { background: var(--ob-surface); color: var(--md-typeset-color); }
+.ob-actions__menu span { display: flex; flex-direction: column; color: var(--ob-muted); }
+.ob-actions__menu b { color: var(--ob-heading); font-size: 0.74rem; }
+.ob-actions__menu svg { flex: none; margin-top: 0.1rem; color: var(--ob-orange); }
+@keyframes ob-pop { from { opacity: 0; transform: translateY(-4px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+/* ---------- Steps: numbered like the app's guides ---------- */
+.md-typeset .steps > ol { counter-reset: step; list-style: none; padding: 0; margin-left: 0; }
+.md-typeset .steps > ol > li {
+  counter-increment: step; position: relative; margin: 0 0 0 0; padding: 0 0 1.1rem 2.6rem;
+}
+.md-typeset .steps > ol > li::before {
+  content: counter(step); position: absolute; left: 0; top: 0.05rem;
+  width: 1.7rem; height: 1.7rem; border-radius: 50%; display: grid; place-items: center;
+  background: var(--ob-orange); color: var(--ob-navy); font-weight: 800; font-size: 0.8rem;
+}
+.md-typeset .steps > ol > li::after {  /* the line joining the steps */
+  content: ""; position: absolute; left: 0.83rem; top: 2rem; bottom: 0.3rem; width: 2px; background: var(--ob-line);
+}
+.md-typeset .steps > ol > li:last-child::after { display: none; }
+.md-typeset .steps > ol > li > p:first-child { margin-top: 0; }
+
+/* ---------- Cards, admonitions, code, tables, tabs: soft and rounded ---------- */
+.md-typeset .admonition, .md-typeset details {
+  border: 1px solid var(--ob-line); border-radius: var(--ob-radius); box-shadow: none;
+  background: var(--ob-surface); font-size: 0.82rem;
+}
+.md-typeset .admonition-title, .md-typeset summary { background: transparent !important; font-weight: 700; border-radius: var(--ob-radius); }
+.md-typeset details[open] > summary { border-radius: var(--ob-radius) var(--ob-radius) 0 0; }
+.md-typeset :is(.admonition, details):not(.robot) { border-color: var(--ob-line); }
+.md-typeset :is(.admonition, details):not(.robot) > :is(.admonition-title, summary)::before { background-color: var(--ob-orange); }
+.md-typeset details > summary::after { background-color: var(--ob-muted); }
+.md-typeset details > summary { color: var(--ob-heading); }
+.md-typeset details:hover { border-color: color-mix(in srgb, var(--ob-orange) 40%, var(--ob-line)); }
+/* "For example": the robot this page is for. */
+.md-typeset .admonition.robot { border-color: color-mix(in srgb, var(--ob-orange) 35%, var(--ob-line)); background: color-mix(in srgb, var(--ob-orange) 6%, var(--ob-card)); }
+.md-typeset .robot > .admonition-title::before {
+  background-color: var(--ob-orange);
+  -webkit-mask-image: var(--md-admonition-icon--robot); mask-image: var(--md-admonition-icon--robot);
+}
+.md-typeset .robot > .admonition-title { color: var(--ob-heading); }
+:root { --md-admonition-icon--robot: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 15.5a1.5 1.5 0 0 1-1.5 1.5 1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 16 14a1.5 1.5 0 0 1 1.5 1.5m-8-1.5A1.5 1.5 0 0 0 8 15.5 1.5 1.5 0 0 0 9.5 17a1.5 1.5 0 0 0 1.5-1.5A1.5 1.5 0 0 0 9.5 14M23 15v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73A2 2 0 0 1 10 4a2 2 0 0 1 2-2 2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1m-2 0h-2v-1a5 5 0 0 0-5-5h-4a5 5 0 0 0-5 5v1H3v2h2v3h14v-3h2z"/></svg>'); }
+
+.md-typeset pre > code, .md-typeset .highlight { border-radius: var(--ob-radius-sm); }
+.md-typeset .highlight { border: 0; }
+.md-typeset .highlight pre { margin: 0.9em 0; }
+.md-typeset .highlight span.filename + pre { margin-top: 0; }
+.md-typeset .highlight span.filename + pre > code { border-radius: 0 0 var(--ob-radius-sm) var(--ob-radius-sm); }
+.md-typeset .highlight .filename {
+  background: var(--md-code-bg-color); border-bottom: 1px solid var(--ob-line); border-radius: var(--ob-radius-sm) var(--ob-radius-sm) 0 0;
+  font-size: 0.7rem; color: var(--ob-muted); font-weight: 700; margin-top: 0.9em;
+}
+.md-typeset code { border-radius: 6px; }
+.md-typeset :not(pre) > code { background: var(--ob-surface); border: 1px solid var(--ob-line); padding: 0.05em 0.35em; }
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--ob-line); border-radius: var(--ob-radius); overflow: hidden; font-size: 0.78rem; box-shadow: none;
+}
+.md-typeset table:not([class]) th { background: var(--ob-surface); color: var(--ob-heading); font-weight: 700; }
+.md-typeset table:not([class]) td { border-top: 1px solid var(--ob-line); }
+.md-typeset table:not([class]) tr:hover { background: transparent; box-shadow: none; }
+
+/* Tabs as a segmented control. */
+.md-typeset .tabbed-labels {
+  display: inline-flex; gap: 0.15rem; padding: 0.2rem; border-radius: 999px; background: var(--ob-surface);
+  border: 1px solid var(--ob-line); box-shadow: none; max-width: 100%; width: fit-content; overflow-x: auto;
+}
+.md-typeset .tabbed-labels > label {
+  border-radius: 999px; padding: 0.3rem 0.85rem; font-size: 0.7rem; font-weight: 700; color: var(--ob-muted); border: 0; width: auto;
+}
+.md-typeset .tabbed-labels > label:hover { color: var(--ob-heading); }
+.md-typeset .tabbed-labels::before { display: none; }  /* Material's underline */
+.md-typeset .tabbed-set > input:nth-child(1):checked ~ .tabbed-labels > :nth-child(1),
+.md-typeset .tabbed-set > input:nth-child(2):checked ~ .tabbed-labels > :nth-child(2),
+.md-typeset .tabbed-set > input:nth-child(3):checked ~ .tabbed-labels > :nth-child(3),
+.md-typeset .tabbed-set > input:nth-child(4):checked ~ .tabbed-labels > :nth-child(4),
+.md-typeset .tabbed-set > input:nth-child(5):checked ~ .tabbed-labels > :nth-child(5) {
+  background: var(--ob-card); color: var(--ob-heading); box-shadow: 0 1px 3px rgb(11 31 68 / 15%);
+}
+.md-typeset .tabbed-content { padding-top: 0.6rem; }
+
+/* Buttons. Orange is the brand's action colour. */
+.md-typeset .md-button {
+  border-radius: 999px; padding: 0.6em 1.4em; font-weight: 700; border: 1.5px solid var(--ob-line);
+  color: var(--ob-heading); background: var(--ob-card); transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.md-typeset .md-button:hover { transform: translateY(-1px); box-shadow: var(--ob-shadow); color: var(--ob-heading); border-color: var(--ob-line); background: var(--ob-card); }
+.md-typeset .md-button--primary { background: var(--ob-orange); border-color: var(--ob-orange); color: var(--ob-navy); }
+.md-typeset .md-button--primary:hover { background: var(--ob-orange); border-color: var(--ob-orange); color: var(--ob-navy); filter: brightness(1.06); }
+
+/* Card grids (Material's "grid cards"). */
+.md-typeset .grid.cards > ul > li, .md-typeset .grid > .card {
+  border: 1px solid var(--ob-line); border-radius: var(--ob-radius); background: var(--ob-card); padding: 1rem 1.1rem;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+}
+.md-typeset .grid.cards > ul > li:hover { transform: translateY(-2px); box-shadow: var(--ob-shadow); border-color: color-mix(in srgb, var(--ob-orange) 45%, var(--ob-line)); }
+.md-typeset .grid.cards > ul > li > p:first-child { font-size: 0.95rem; margin-top: 0; }
+.md-typeset .grid.cards .twemoji, .md-typeset .grid.cards svg { color: var(--ob-orange); }
+.md-typeset .grid.cards > ul > li > hr { display: none; }
+.md-typeset .grid.ways { grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); }
+@media screen and (min-width: 60em) { .md-typeset .grid.ways { grid-template-columns: repeat(5, 1fr); gap: 0.6rem; } .md-typeset .grid.cards.ways > ul > li { padding: 0.9rem; } }
+/* A whole card is the link. */
+.md-typeset .grid.cards.ways > ul > li { position: relative; }
+.md-typeset .grid.cards.ways a::after { content: ""; position: absolute; inset: 0; }
+/* A card with several links (Programming: Python, C++, Rust): each link is itself, not the whole card. */
+.md-typeset .grid.cards.ways li:has(a ~ a) a::after { content: none; }
+.md-typeset .grid.cards.ways li:has(a ~ a) a { color: var(--md-typeset-a-color); font-weight: 600; }
+.md-typeset .grid.cards.ways a { color: var(--ob-heading); text-decoration: none; }
+.md-typeset .grid.cards.ways > ul > li p:last-child { color: var(--ob-muted); font-size: 0.78rem; line-height: 1.5; }
+.md-typeset .ob-icon { display: inline-grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 12px; background: color-mix(in srgb, var(--ob-orange) 12%, transparent); margin-bottom: 0.4rem; }
+.md-typeset .ob-icon svg { width: 1.25rem; height: 1.25rem; }
+
+/* Screenshots. */
+.md-typeset .shot { max-width: 260px; border-radius: 22px; box-shadow: var(--ob-shadow); }
+
+/* Footer: quiet. */
+.md-footer, .md-footer-meta { background: var(--ob-surface); color: var(--ob-muted); }
+.md-footer__link, .md-footer__title { color: var(--ob-heading); }
+.md-footer-meta { border-top: 1px solid var(--ob-line); }
+.md-footer-meta .md-copyright, .md-footer-meta a { color: var(--ob-muted); }
+
+/* ---------- Home ---------- */
+.ob-only-dark { display: none; }
+[data-md-color-scheme="slate"] .ob-only-dark { display: block; }
+[data-md-color-scheme="slate"] .ob-only-light { display: none; }
+
+.ob-hero {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, color-mix(in srgb, var(--ob-orange) 16%, transparent), transparent 60%),
+    radial-gradient(50rem 30rem at -10% 110%, color-mix(in srgb, var(--ob-blue) 14%, transparent), transparent 60%),
+    var(--ob-surface);
+  border-bottom: 1px solid var(--ob-line);
+}
+.ob-hero__inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: center; padding: 3.2rem 1.2rem 2.6rem; }
+.ob-eyebrow { font-weight: 800; letter-spacing: 0.02em; font-size: 0.8rem; margin: 0 0 0.6rem; }
+/* The brand, everywhere: AllSense by OtterBridge, Bridge in orange. */
+.ob-brand { color: var(--ob-heading); font-weight: 700; }
+.ob-brand__by { color: var(--ob-muted); font-weight: 600; }
+.ob-brand__bridge { color: var(--ob-orange); }
+.ob-hero h1 { font-size: 2.9rem; line-height: 1.05; letter-spacing: -0.035em; font-weight: 800; color: var(--ob-heading); margin: 0 0 1rem; }
+.ob-hero h1 em { font-style: normal; color: var(--ob-orange); }
+.ob-hero__lead { font-size: 1.02rem; line-height: 1.6; color: var(--ob-muted); max-width: 32rem; margin: 0 0 1.6rem; }
+.ob-hero__buttons { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.ob-hero .md-button {
+  display: inline-flex; align-items: center; gap: 0.45rem; border-radius: 999px; padding: 0.7em 1.5em; font-weight: 700;
+  font-size: 0.82rem; cursor: pointer; font-family: inherit; border: 1.5px solid var(--ob-line); color: var(--ob-heading); background: var(--ob-card);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.ob-hero .md-button:hover { transform: translateY(-1px); box-shadow: var(--ob-shadow); }
+.ob-hero .md-button--primary { background: var(--ob-orange); border-color: var(--ob-orange); color: var(--ob-navy); }
+.ob-hero .md-button svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+.ob-hero .md-button.ob-done { color: #1E9E5A; }
+
+.ob-hero__phone { position: relative; justify-self: center; }
+.ob-phone {
+  width: 15rem; aspect-ratio: 1080 / 2340; border-radius: 2.4rem; padding: 0.45rem; background: #0B1F44;
+  box-shadow: 0 30px 60px rgb(11 31 68 / 25%), inset 0 0 0 2px #22365E; transform: rotate(2.5deg);
+}
+.ob-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 2rem; }
+.ob-chip {
+  position: absolute; display: inline-flex; align-items: center; gap: 0.45rem; white-space: nowrap;
+  padding: 0.45rem 0.8rem; border-radius: 999px; font-size: 0.72rem; color: var(--md-typeset-color);
+  background: var(--ob-glass); border: 1px solid var(--ob-line); box-shadow: var(--ob-shadow);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  animation: ob-float 6s ease-in-out infinite;
+}
+.ob-chip b { color: var(--ob-live); font-variant-numeric: tabular-nums; }
+.ob-chip i { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--ob-live); box-shadow: 0 0 0 0 var(--ob-live); animation: ob-pulse 2s infinite; }
+.ob-chip--1 { top: 14%; left: -66%; }
+.ob-chip--2 { top: 47%; right: -58%; animation-delay: -2s; }
+.ob-chip--3 { bottom: 16%; left: -52%; animation-delay: -4s; }
+@keyframes ob-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes ob-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ob-live) 60%, transparent); } 70%, 100% { box-shadow: 0 0 0 6px transparent; } }
+@media (prefers-reduced-motion: reduce) { .ob-chip, .ob-chip i, .ob-actions__menu { animation: none; } }
+
+/* The home page's content below the hero. */
+.md-typeset .ob-section-title { text-align: center; margin-top: 2.6rem; }
+.md-typeset .ob-section-sub { text-align: center; color: var(--ob-muted); margin-top: -0.6rem; }
+.md-typeset .ob-steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; counter-reset: s; }
+.md-typeset .ob-steps3 > div {
+  counter-increment: s; border: 1px solid var(--ob-line); border-radius: var(--ob-radius); padding: 1rem 1.1rem; background: var(--ob-card);
+}
+.md-typeset .ob-steps3 > div::before {
+  content: counter(s); display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%;
+  background: var(--ob-orange); color: var(--ob-navy); font-weight: 800; font-size: 0.8rem; margin-bottom: 0.5rem;
+}
+.md-typeset .ob-steps3 p { margin: 0.2rem 0 0; color: var(--ob-muted); font-size: 0.8rem; }
+.md-typeset .ob-steps3 strong { font-size: 0.95rem; }
+.md-typeset .ob-uses { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+.md-typeset .ob-uses > div { border: 1px solid var(--ob-line); border-radius: var(--ob-radius); padding: 1rem 1.1rem; background: var(--ob-surface); }
+.md-typeset .ob-uses .ob-icon { margin-bottom: 0.1rem; }
+.md-typeset .ob-uses p { margin: 0.4rem 0 0; font-size: 0.8rem; color: var(--ob-muted); }
+.md-typeset .ob-uses strong { display: block; margin-top: 0.4rem; font-size: 0.92rem; }
+.md-typeset .ob-ai {
+  display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: center; margin-top: 2.6rem;
+  border-radius: var(--ob-radius); padding: 1.2rem 1.3rem; color: #E6ECF5;
+  background: radial-gradient(30rem 12rem at 100% 0%, rgb(34 211 238 / 18%), transparent 70%), var(--ob-navy);
+}
+.md-typeset .ob-ai strong { color: #FFFFFF; font-size: 1rem; }
+.md-typeset .ob-ai p { margin: 0.2rem 0 0; color: #A3B1C6; font-size: 0.8rem; }
+.md-typeset .ob-ai code { background: rgb(255 255 255 / 8%); border-color: rgb(255 255 255 / 12%); color: var(--ob-cyan); }
+.md-typeset .ob-ai a { color: var(--ob-cyan); }
+.md-typeset .ob-ai .ob-otter { width: 3.6rem; height: 3.6rem; border-radius: 16px; }
+.md-typeset .ob-taste .tabbed-set { margin-top: 0.4rem; }
+
+/* ---------- Phones ---------- */
+@media screen and (max-width: 59.9375em) {
+  .md-header, .md-tabs { background-color: var(--md-default-bg-color); }
+}
+@media screen and (max-width: 52em) {
+  .ob-hero__inner { grid-template-columns: 1fr; padding: 2.2rem 1rem 2rem; }
+  .ob-hero h1 { font-size: 2.2rem; }
+  .ob-hero__phone { display: none; }
+  .md-typeset .ob-steps3, .md-typeset .ob-uses { grid-template-columns: 1fr; }
+  .md-typeset h1 { font-size: 1.7rem; }
+  .ob-actions { float: none; margin: 0.2rem 0 0.6rem; }
+}
+
+/* Time and what you need, under a page's lead. */
+.md-typeset .ob-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: -0.2rem 0 1rem; }
+.md-typeset .ob-meta > p { display: contents; }
+.md-typeset .ob-meta span:not(.twemoji) {
+  display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.2rem 0.7rem; border-radius: 999px;
+  background: var(--ob-surface); border: 1px solid var(--ob-line); font-size: 0.7rem; color: var(--ob-muted); font-weight: 600;
+}
+.md-typeset .ob-meta .twemoji svg { width: 0.9rem; height: 0.9rem; fill: var(--ob-orange); }
+/* Numbered steps hold code blocks: give those room. */
+.md-typeset .steps > ol > li > .highlight, .md-typeset .steps > ol > li > div.highlight { margin-top: 0.5rem; }
+
+/* Cards read as one block: title and text close together. */
+.md-typeset .admonition > .admonition-title { margin-bottom: 0; padding-bottom: 0.2rem; }
+.md-typeset .admonition > .admonition-title + p { margin-top: 0.2rem; padding-bottom: 0.2rem; }
+
+/* ---------- Diagrams (docs/diagrams/*.svg, made by tools/make_diagrams.py) ---------- */
+.md-typeset figure.ob-diagram {
+  display: block; width: 100%; max-width: none; margin: 1.4rem 0 1.8rem; padding: 1rem 1rem 0.6rem;
+  border: 1px solid var(--ob-line); border-radius: var(--ob-radius); background: var(--ob-surface);
+}
+.md-typeset figure.ob-diagram svg { display: block; width: 100%; height: auto; font-family: var(--md-text-font-family); }
+.md-typeset figure.ob-diagram figcaption { max-width: none; margin: 0.6rem 0 0; font-size: 0.74rem; color: var(--ob-muted); text-align: left; font-style: normal; }
+.dg-frame { fill: none; stroke: var(--ob-line); stroke-width: 1.5; stroke-dasharray: 6 5; }
+.dg-box { fill: var(--ob-card); stroke: var(--ob-line); stroke-width: 1.2; }
+.dg-inner { fill: var(--md-default-bg-color); stroke: var(--ob-line); stroke-width: 1.2; }
+[data-md-color-scheme="slate"] .dg-inner { fill: #0E2550; }
+.dg-box-accent { stroke: var(--ob-orange); stroke-width: 2; }
+.dg-title { fill: var(--ob-heading); font-size: 13px; font-weight: 700; }
+.dg-sub, .dg-label { fill: var(--ob-muted); font-size: 11px; }
+.dg-head { fill: var(--ob-muted); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; }
+.dg-mono { fill: var(--ob-heading); font-size: 12px; font-family: var(--md-code-font-family); }
+.dg-arrow { stroke: var(--ob-muted); stroke-width: 1.5; fill: none; }
+.dg-axis { stroke: var(--ob-line); stroke-width: 2; }
+.dg-tip { fill: var(--ob-muted); }
+.dg-tip-accent { fill: var(--ob-orange); }
+.dg-tick { stroke: var(--ob-muted); stroke-width: 1.4; }
+.dg-tick.dg-accent, .dg-arrow.dg-accent { stroke: var(--ob-orange); }
+.dg-gate { stroke: var(--ob-orange); stroke-width: 2; stroke-dasharray: 4 5; }
+.dg-accent-text { fill: var(--ob-orange); }
+.dg-dot { fill: var(--ob-orange); }
+/* Diagrams are wider than the text where there's room, so their labels stay readable. */
+@media screen and (min-width: 76.25em) {
+  .md-typeset figure.ob-diagram { width: calc(100% + 8rem); margin-left: -8rem; margin-right: 0; }
+}
+.md-typeset .ob-icon { color: var(--ob-orange); }
+.md-typeset .ob-icon svg { fill: currentColor; }
+.md-typeset .ob-icon .twemoji, .md-typeset .ob-icon .twemoji svg { width: 1.3rem; height: 1.3rem; max-height: none; }
+.md-typeset .ob-ai p strong { font-size: inherit; color: #FFFFFF; }
+.md-typeset .ob-ai p:first-child > strong:only-child { font-size: 1rem; }
