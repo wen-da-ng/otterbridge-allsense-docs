@@ -131,7 +131,7 @@ Types: `u8`, `i8`, `u16`, `i16`, `u32`, `i32` and `f32` (IEEE-754 float).
    ./gradlew -q :core:model:checkTemplate --args="my_template.json"
    ```
    It prints the settings (endian, checksum, baud), the data rate, and an example frame with a map of what every byte is, or says exactly what's wrong.
-2. **Check the board** (USB serial on a PC): `allsense-fake-template --port COM6 --template my_template.json` sends frames like the phone does, with typical values (gravity on z, 1013 hPa…). If the board prints `frames=<good> bad=<bad>` once a second (like the TemplateReader example), the tool checks the counts and says PASS or FAIL. If it can't print, the tool says "SENT, not verified": then check the board's own behaviour (motors, LEDs, its debug port).
+2. **Check the board** (USB serial on a PC): `allsense-fake-template --port COM3 --template my_template.json` sends frames like the phone does, with typical values (gravity on z, 1013 hPa…). If the board prints `frames=<good> bad=<bad>` once a second (like the TemplateReader example), the tool checks the counts and says PASS or FAIL. If it can't print, the tool says "SENT, not verified": then check the board's own behaviour (motors, LEDs, its debug port).
    Over BLE: `allsense-fake-template --ble "<board name>" --template my_template.json` (the board must not be connected to the phone). The TemplateReaderBLE example reports its counts as notifications, so the tool can check it.
 3. Decode a captured frame: `allsense-template decode my_template.json "AA 55 0C 00 …"`.
 
