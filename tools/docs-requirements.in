@@ -1,0 +1,4 @@
+# Top-level pins for the docs build. The hash-locked list CI installs is docs-requirements.txt;
+# regenerate it after changing this file (see README.md, "Build it").
+mkdocs==1.6.1
+mkdocs-material==9.7.7

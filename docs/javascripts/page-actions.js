@@ -46,7 +46,7 @@
       close();
     });
     document.querySelectorAll("[data-ob-open]").forEach(a => {
-      const prompt = `Read ${location.href} (AllSense docs) and help me with it.`;
+      const prompt = `Read ${location.origin + location.pathname} (AllSense docs) and help me with it.`;
       a.href = a.dataset.obOpen + encodeURIComponent(prompt);
     });
   }

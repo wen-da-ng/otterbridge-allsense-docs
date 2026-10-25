@@ -15,7 +15,8 @@ The AllSense docs site (https://docs.allsense.otterbridge.org/): MkDocs Material
 python tools/sync.py --check            # copies match the sibling repos
 ```
 
-Setup: `python -m venv .venv && .venv/Scripts/pip install -r tools/docs-requirements.txt`. The user previews with `mkdocs serve`.
+Setup: `python -m venv .venv && .venv/Scripts/pip install --require-hashes -r tools/docs-requirements.txt`. The user previews with `mkdocs serve`.
+Dependencies: `tools/docs-requirements.in` holds the two top-level pins; `tools/docs-requirements.txt` is the hash-locked list CI installs (`--require-hashes`). After changing the `.in`, regenerate: `uv pip compile tools/docs-requirements.in --universal --python-version 3.12 --generate-hashes -o tools/docs-requirements.txt`, then check a fresh venv installs it and `mkdocs build --strict` passes. Workflow actions are pinned to commit SHAs (version in a trailing comment); Dependabot (`.github/dependabot.yml`) proposes weekly updates for both.
 
 ## Style
 

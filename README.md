@@ -8,10 +8,18 @@ Markdown in `docs/`, built with [MkDocs Material](https://squidfunk.github.io/mk
 
 ```bash
 python -m venv .venv
-.venv/Scripts/pip install -r tools/docs-requirements.txt    # .venv/bin/pip on Linux and macOS
-.venv/Scripts/mkdocs serve                                   # preview at http://127.0.0.1:8000
-.venv/Scripts/mkdocs build --strict                          # what CI runs
+.venv/Scripts/pip install --require-hashes -r tools/docs-requirements.txt  # .venv/bin/pip on Linux and macOS
+.venv/Scripts/mkdocs serve                                                  # preview at http://127.0.0.1:8000
+.venv/Scripts/mkdocs build --strict                                         # what CI runs
 ```
+
+`tools/docs-requirements.txt` pins every package with its hashes (CI installs it with `--require-hashes`). To change a version, edit the two top-level pins in `tools/docs-requirements.in` and regenerate the locked list with [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv pip compile tools/docs-requirements.in --universal --python-version 3.12 --generate-hashes -o tools/docs-requirements.txt
+```
+
+Dependabot proposes updates to it and to the pinned actions every week.
 
 Every push to `main` publishes the site to GitHub Pages (`.github/workflows/ci.yml`); pull requests only build it.
 

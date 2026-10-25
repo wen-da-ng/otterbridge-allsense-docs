@@ -97,7 +97,8 @@ Real code from the repository, tested on every change.
 === "ROS 2"
 
     ```bash
-    ros2 run allsense_ros2 bridge --ros-args -p url:="http://192.168.1.20:8765/?token=abcd"
+    export ALLSENSE_TOKEN=abcd
+    ros2 run allsense_ros2 bridge --ros-args -p url:="http://192.168.1.20:8765/"
     ros2 topic echo /allsense/phone/imu
     ```
 

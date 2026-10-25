@@ -28,16 +28,19 @@ The phone doesn't run ROS: a bridge node on the robot's computer turns its strea
 
 2. On the phone: **Home → Start streaming**, then copy the link from **Connect → ROS 2**.
 
-3. Run the bridge and see the topics:
+3. Run the bridge with the link's address, and its token (after `?token=`) in `ALLSENSE_TOKEN`, then see the topics:
 
     ```bash
-    ros2 run allsense_ros2 bridge --ros-args -p url:="http://192.168.1.20:8765/?token=abcd"
+    export ALLSENSE_TOKEN=abcd
+    ros2 run allsense_ros2 bridge --ros-args -p url:="http://192.168.1.20:8765/"
     ros2 topic list | grep allsense
     ```
 
 </div>
 
 ## Details
+
+**Why the token goes in an environment variable:** ROS parameters can be read by anything on the same ROS network (`ros2 param get`). A token passed in `url` still works, but the bridge removes it from the parameter and warns. To keep it in a file instead: `token_file:=~/.allsense_token` (make the file readable only by you).
 
 **Topics** follow the app's names: `/allsense/<device>/sensors/<name>`. `/allsense/<device>/imu` combines accelerometer, gyroscope and orientation in one `sensor_msgs/Imu`, the form `robot_localization` wants.
 
